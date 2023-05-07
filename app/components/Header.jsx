@@ -7,7 +7,7 @@ import logo from "@/public/logo.png";
 
 const Header = () => {
     const isBreakpoint = useMediaQuery(768);
-    console.log(isBreakpoint);
+
     return (
         <header className="h-[125px] bg-primary drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] relative md:flex md:justify-end md:items-center md:pr-[80px]">
             <Image
@@ -17,7 +17,13 @@ const Header = () => {
             />
             {isBreakpoint ? null : (
                 <div className="hidden md:block">
-                    <SocialMedia color="white" width="118" />
+                    <SocialMedia
+                        color="white"
+                        background={false}
+                        width="118"
+                        iconWidth="28"
+                        iconHeight="28"
+                    />
                 </div>
             )}
         </header>

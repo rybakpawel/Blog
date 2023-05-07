@@ -2,14 +2,15 @@
 
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import Link from "next/link";
 import useMediaQuery from "../hooks/useMediaQuery";
 import SocialMedia from "./SocialMedia";
-import Link from "next/link";
 
-const iconStyle = {
+const hamburgerIconStyle = {
     width: "28px",
     height: "28px",
     color: "#1A1D1E",
+    cursor: "pointer",
 };
 
 const Navigation = () => {
@@ -27,7 +28,7 @@ const Navigation = () => {
                 <nav>
                     {isBreakpoint ? (
                         <GiHamburgerMenu
-                            style={iconStyle}
+                            style={hamburgerIconStyle}
                             onClick={toggleMenu}
                         />
                     ) : null}
@@ -35,26 +36,32 @@ const Navigation = () => {
                         className={`${isMenuVisible} tracking-[1px] md:h-[70px] md:flex md:justify-center md:items-center`}
                     >
                         <Link href="/">
-                            <li className="mt-[15px] mb-[10px] md:my-0">
+                            <li className="mt-[15px] mb-[10px] md:my-0 md:mx-[10px]">
                                 START
                             </li>
                         </Link>
                         <Link href="/about">
-                            <li className="mb-[10px] md:mb-0">O MNIE</li>
+                            <li className="mb-[10px] md:mb-0 md:mx-[10px]">
+                                O MNIE
+                            </li>
                         </Link>
                         <Link href="/programming">
-                            <li className="mb-[10px] md:mb-0">PROGRAMOWANIE</li>
+                            <li className="mb-[10px] md:mb-0 md:mx-[10px]">
+                                PROGRAMOWANIE
+                            </li>
                         </Link>
                         <Link href="/contact">
-                            <li>KONTAKT</li>
+                            <li className="md:mx-[10px]">KONTAKT</li>
                         </Link>
                     </ul>
                 </nav>
                 {isBreakpoint ? (
                     <SocialMedia
                         color="#1A1D1E"
-                        background="none"
+                        background={false}
                         width="118"
+                        iconWidth="28"
+                        iconHeight="28"
                     />
                 ) : null}
             </div>
