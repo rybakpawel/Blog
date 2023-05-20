@@ -1,4 +1,5 @@
 import prisma from ".";
+import { Prisma } from "@prisma/client";
 
 export async function getArticles() {
     try {
@@ -23,6 +24,10 @@ export async function getArticleById(id) {
         const article = await prisma.article.findUnique({ where: { id } });
         return { article };
     } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            if (error.code === "P2023") return { error: 404 };
+            else return { error: 500 };
+        }
         return { error };
     }
 }
