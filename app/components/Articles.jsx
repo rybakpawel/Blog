@@ -1,3 +1,6 @@
+import ArticlesListItem from "./ArticlesListItem";
+import defaultImage from "@/public/defaultImage.jpg";
+
 async function fetchArticles() {
     const response = await fetch(`${process.env.API_URL}/articles`);
     const articles = await response.json();
@@ -9,7 +12,17 @@ const Articles = async () => {
 
     return (
         <section className="md:w-[71%]">
-            <div>{articles[0].title}</div>
+            {articles.map((article) => {
+                return (
+                    <ArticlesListItem
+                        id={article.id}
+                        img={defaultImage}
+                        title={article.title}
+                        content={article.content}
+                        createdDate={article.createdDate}
+                    />
+                );
+            })}
         </section>
     );
 };
