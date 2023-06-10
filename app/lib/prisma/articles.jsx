@@ -1,11 +1,25 @@
 import prisma from ".";
 import { Prisma } from "@prisma/client";
 
-export async function getArticles() {
+export async function getArticles(page) {
+    const skip = (page - 1) * 2;
     try {
-        const articles = await prisma.article.findMany();
-        return { articles };
+        const [articles, totalArticles] = await prisma.$transaction([
+            prisma.article.findMany({
+                skip,
+                take: 2,
+                orderBy: {
+                    id: "desc",
+                },
+            }),
+            prisma.article.count(),
+        ]);
+        return { articles, totalArticles };
     } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            if (error.code === "P2023") return { error: 404 };
+            else return { error: 500 };
+        }
         return { error };
     }
 }

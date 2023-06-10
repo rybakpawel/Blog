@@ -5,6 +5,7 @@ export async function GET(request, { params }) {
     try {
         const { id } = params;
         const { article, error } = await getArticleById(id);
+
         if (error) {
             return NextResponse.json(error);
         }

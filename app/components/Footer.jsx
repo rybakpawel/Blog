@@ -32,7 +32,7 @@ const Footer = () => {
                 </ul>
                 <div className="flex justify-center items-center grow">
                     <p className="text-sm">
-                        Skill Booster 2023. Wszelkie prawa zastrzeżone.
+                        Paweł Rybak 2023. Wszelkie prawa zastrzeżone.
                     </p>
                 </div>
             </div>
