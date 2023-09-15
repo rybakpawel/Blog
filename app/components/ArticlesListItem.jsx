@@ -3,6 +3,9 @@ import Link from "next/link";
 import DateLine from "./DateLine";
 
 const ArticlesListItem = ({ id, img, title, content, createdDate }) => {
+    const datetime = new Date(createdDate);
+    const articleDate = datetime.toISOString().split("T")[0];
+
     return (
         <div className="my-[20px]">
             <div className="md:flex md:max-h-[200px] md:mb-[16px]">
@@ -22,7 +25,7 @@ const ArticlesListItem = ({ id, img, title, content, createdDate }) => {
                     <p className="h-[7.5em] overflow-hidden">{content}</p>
                 </div>
             </div>
-            <DateLine variant="more" date={createdDate} id={id} />
+            <DateLine variant="more" date={articleDate} id={id} />
         </div>
     );
 };

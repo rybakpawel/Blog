@@ -1,10 +1,11 @@
 import Articles from "./components/Articles";
+import SideBar from "./components/SideBar";
 
 export default function HomePage() {
     return (
         <div className="md:flex md:justify-between">
-            <Articles />
-            <aside className="md:w-[24%]">elo aside</aside>
+            {/* <Articles /> */}
+            <SideBar />
         </div>
     );
 }

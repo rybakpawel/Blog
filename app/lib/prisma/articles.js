@@ -2,12 +2,12 @@ import prisma from ".";
 import { Prisma } from "@prisma/client";
 
 export async function getArticles(page) {
-    const skip = (page - 1) * 2;
+    const skip = (page - 1) * 10;
     try {
         const [articles, totalArticles] = await prisma.$transaction([
             prisma.article.findMany({
                 skip,
-                take: 2,
+                take: 10,
                 orderBy: {
                     id: "desc",
                 },

@@ -3,14 +3,14 @@ import PaginationButton from "./PaginationButton";
 
 const Pagination = ({ page, totalArticles }) => {
     if (!page) page = 1;
-    const totalPages = Math.ceil(totalArticles / 2);
+    const totalPages = Math.ceil(totalArticles / 10);
 
     const buttonsPage = {
-        first: 1,
+        first: totalPages > 1 ? 1 : null,
         previous: page > 2 ? page - 1 : null,
         current: page > 1 && page < totalPages ? page : null,
         next: page < totalPages - 1 ? page + 1 : null,
-        last: totalPages,
+        last: totalPages > 1 ? totalPages : null,
     };
 
     return (

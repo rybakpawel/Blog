@@ -50,6 +50,9 @@ const Articles = async () => {
             ) : (
                 <p>Brak artykułów</p>
             )}
+            <button onClick={() => console.log("on click w articles")}>
+                click articles
+            </button>
         </section>
     );
 };

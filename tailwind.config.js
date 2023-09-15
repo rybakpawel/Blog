@@ -5,6 +5,7 @@ module.exports = {
         "./components/**/*.{js,ts,jsx,tsx}",
         "./app/**/*.{js,ts,jsx,tsx}",
     ],
+    safelist: ["text-black", "text-error", "text-success", "border-error"],
     theme: {
         extend: {
             colors: {
@@ -26,6 +27,13 @@ module.exports = {
                 "2xl": "31px",
                 "3xl": "39px",
                 "4xl": "49px",
+            },
+            opacity: {
+                75: ".75",
+                50: ".5",
+                25: ".25",
+                10: ".1",
+                5: ".05",
             },
         },
     },
