@@ -5,11 +5,11 @@ import ArticlesListItem from "./ArticlesListItem";
 import Pagination from "./Pagination";
 import defaultImage from "@/public/defaultImage.jpg";
 
-async function fetchArticles(pageIndex) {
+async function fetchArticles(pageIndex, limit) {
     const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/articles?page=${
             !pageIndex ? 1 : pageIndex
-        }`,
+        }&limit=${limit}`,
         {
             cache: "no-store",
         }
@@ -24,7 +24,7 @@ const Articles = async () => {
     const searchParams = useSearchParams();
     const pageParam = searchParams.get("page");
 
-    const { articles, totalArticles } = await fetchArticles(pageParam);
+    const { articles, totalArticles } = await fetchArticles(pageParam, 5);
 
     return (
         <section className="md:w-[71%]">
@@ -50,9 +50,6 @@ const Articles = async () => {
             ) : (
                 <p>Brak artykułów</p>
             )}
-            <button onClick={() => console.log("on click w articles")}>
-                click articles
-            </button>
         </section>
     );
 };

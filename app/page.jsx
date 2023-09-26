@@ -4,7 +4,7 @@ import SideBar from "./components/SideBar";
 export default function HomePage() {
     return (
         <div className="md:flex md:justify-between">
-            {/* <Articles /> */}
+            <Articles />
             <SideBar />
         </div>
     );
