@@ -25,6 +25,11 @@ export default async function TableOfContents() {
                 <h1 className="my-[30px] text-2xl">Spis treści</h1>
                 {articles.length > 0 ? (
                     articles.map((article, index) => {
+                        const datetime = new Date(article.createdDate);
+                        const articleDate = datetime
+                            .toISOString()
+                            .split("T")[0];
+
                         return (
                             <Link
                                 href={`/articles/${article.id}`}
@@ -35,7 +40,7 @@ export default async function TableOfContents() {
                                         index + 1
                                     }. ${article.title}`}</p>
                                     <p className="text-sm md:text-lg">
-                                        {article.createdDate}
+                                        {articleDate}
                                     </p>
                                 </div>
                             </Link>

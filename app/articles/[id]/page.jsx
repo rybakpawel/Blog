@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Article from "../../components/Article";
+import SideBar from "../../components/SideBar";
 import defaultImage from "@/public/defaultImage.jpg";
 
 async function fetchArticleById(id) {
@@ -24,7 +25,7 @@ export default async function ArticlePage({ params }) {
                 content={content}
                 createdDate={createdDate}
             />
-            <aside className="md:w-[24%]">elo aside</aside>
+            <SideBar />
         </div>
     );
 }
