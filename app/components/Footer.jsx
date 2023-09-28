@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="h-[100px] flex justify-center items-center">
                 <SocialMedia
                     color="white"
-                    background="none"
+                    background="original"
                     width="160"
                     iconWidth="25"
                     iconHeight="25"

@@ -1,11 +1,19 @@
 "use client";
 
+import { Space_Mono } from "next/font/google";
 import Link from "next/link";
 import { IconContext } from "react-icons";
 import { RiFacebookFill, RiLinkedinFill, RiGithubFill } from "react-icons/ri";
 
 const SocialMedia = (socialMedia) => {
-    const { color, background, width, iconWidth, iconHeight } = socialMedia;
+    const {
+        color,
+        background,
+        width,
+        iconWidth,
+        iconHeight,
+        direction = "row",
+    } = socialMedia;
 
     const roundedBackground = {
         width: +iconWidth + +iconWidth / 2,
@@ -15,24 +23,35 @@ const SocialMedia = (socialMedia) => {
     return (
         <IconContext.Provider value={{ color }}>
             <div
-                style={{ width: `${width}px` }}
+                style={{ width: `${width}px`, flexDirection: `${direction}` }}
                 className="flex justify-between"
             >
                 <Link href="https://www.facebook.com/wksryba/">
                     {background ? (
-                        <div
-                            style={{
-                                width: `${roundedBackground.width}px`,
-                                height: `${roundedBackground.height}px`,
-                            }}
-                            className={`bg-facebookBackground rounded-[50%] flex justify-center items-center`}
-                        >
-                            <RiFacebookFill
+                        <div className="flex items-center">
+                            <div
                                 style={{
-                                    width: `${iconWidth}px`,
-                                    height: `${iconHeight}px`,
+                                    width: `${roundedBackground.width}px`,
+                                    height: `${roundedBackground.height}px`,
                                 }}
-                            />
+                                className={`${
+                                    background === "primary"
+                                        ? "bg-primary"
+                                        : "bg-facebookBackground"
+                                } rounded-[50%] flex justify-center items-center`}
+                            >
+                                <RiFacebookFill
+                                    style={{
+                                        width: `${iconWidth}px`,
+                                        height: `${iconHeight}px`,
+                                    }}
+                                />
+                            </div>
+                            {direction === "column" ? (
+                                <span className="ml-[20px] text-lg font-bold">
+                                    Facebook
+                                </span>
+                            ) : null}
                         </div>
                     ) : (
                         <RiFacebookFill
@@ -46,18 +65,33 @@ const SocialMedia = (socialMedia) => {
                 <Link href="https://www.linkedin.com/in/pawe%C5%82-rybak-161a5222b/">
                     {background ? (
                         <div
-                            style={{
-                                width: `${roundedBackground.width}px`,
-                                height: `${roundedBackground.height}px`,
-                            }}
-                            className={`bg-linkedinBackground rounded-[50%] flex justify-center items-center`}
+                            className={`flex items-center ${
+                                direction === "column" ? "my-[20px]" : ""
+                            }`}
                         >
-                            <RiLinkedinFill
+                            <div
                                 style={{
-                                    width: `${iconWidth}px`,
-                                    height: `${iconHeight}px`,
+                                    width: `${roundedBackground.width}px`,
+                                    height: `${roundedBackground.height}px`,
                                 }}
-                            />
+                                className={`${
+                                    background === "primary"
+                                        ? "bg-primary"
+                                        : "bg-linkedinBackground"
+                                } rounded-[50%] flex justify-center items-center`}
+                            >
+                                <RiLinkedinFill
+                                    style={{
+                                        width: `${iconWidth}px`,
+                                        height: `${iconHeight}px`,
+                                    }}
+                                />
+                            </div>
+                            {direction === "column" ? (
+                                <span className="ml-[20px] text-lg font-bold">
+                                    Linkedin
+                                </span>
+                            ) : null}
                         </div>
                     ) : (
                         <RiLinkedinFill
@@ -70,19 +104,30 @@ const SocialMedia = (socialMedia) => {
                 </Link>
                 <Link href="https://github.com/rybakpawel">
                     {background ? (
-                        <div
-                            style={{
-                                width: `${roundedBackground.width}px`,
-                                height: `${roundedBackground.height}px`,
-                            }}
-                            className={`bg-githubBackground rounded-[50%] flex justify-center items-center`}
-                        >
-                            <RiGithubFill
+                        <div className="flex items-center">
+                            <div
                                 style={{
-                                    width: `${iconWidth}px`,
-                                    height: `${iconHeight}px`,
+                                    width: `${roundedBackground.width}px`,
+                                    height: `${roundedBackground.height}px`,
                                 }}
-                            />
+                                className={`${
+                                    background === "primary"
+                                        ? "bg-primary"
+                                        : "bg-githubBackground"
+                                } rounded-[50%] flex justify-center items-center`}
+                            >
+                                <RiGithubFill
+                                    style={{
+                                        width: `${iconWidth}px`,
+                                        height: `${iconHeight}px`,
+                                    }}
+                                />
+                            </div>
+                            {direction === "column" ? (
+                                <span className="ml-[20px] text-lg font-bold">
+                                    Github
+                                </span>
+                            ) : null}
                         </div>
                     ) : (
                         <RiGithubFill
