@@ -5,7 +5,10 @@ import defaultImage from "@/public/defaultImage.jpg";
 
 async function fetchArticleById(id) {
     const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`
+        `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`,
+        {
+            cache: "no-store",
+        }
     );
     const article = await response.json();
 
@@ -16,16 +19,21 @@ async function fetchArticleById(id) {
 export default async function ArticlePage({ params }) {
     const { id } = params;
     const article = await fetchArticleById(id);
-    const { title, content, createdDate } = article;
-    return (
+
+    const { title, content, createdDate, comments, _count } = article;
+
+    return _count ? (
         <div className="md:flex md:justify-between">
             <Article
+                id={id}
                 image={defaultImage}
                 title={title}
                 content={content}
                 createdDate={createdDate}
+                comments={comments}
+                countComments={_count.comments}
             />
             <SideBar />
         </div>
-    );
+    ) : null;
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { FaCommentAlt } from "react-icons/fa";
 
-const DateLine = ({ variant, date, id }) => {
+const DateLine = ({ variant, date, id, countComments }) => {
     return (
         <div>
             <hr />
@@ -18,12 +18,18 @@ const DateLine = ({ variant, date, id }) => {
                     </Link>
                 ) : null}
                 {variant === "comment" ? (
-                    <div className="flex justify-center relative">
-                        <FaCommentAlt size={20} style={{ color: "#105775" }} />
-                        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white">
-                            4
-                        </span>
-                    </div>
+                    <Link href="#comments">
+                        <div className="flex justify-center relative">
+                            <FaCommentAlt
+                                size={20}
+                                style={{ color: "#105775" }}
+                            />
+
+                            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white">
+                                {countComments}
+                            </span>
+                        </div>
+                    </Link>
                 ) : null}
             </div>
             <hr />

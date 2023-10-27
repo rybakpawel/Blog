@@ -58,7 +58,6 @@ const ContactForm = () => {
             const searchErrorMessage = (label) => {
                 let message;
                 res.locations.forEach((element) => {
-                    console.log(element.label);
                     if (element.label === label) message = element.message;
                 });
 

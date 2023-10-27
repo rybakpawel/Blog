@@ -39,9 +39,11 @@ model Comment {
     id              String      @id @default(auto()) @map("_id") @db.ObjectId
     content         String
     createdDate     DateTime    @default(now())
+    guestName       String?
+    guestEmail      String?
 
-    author          User        @relation(fields: [authorId], references: [id])
-    authorId        String      @db.ObjectId
+    author          User?       @relation(fields: [authorId], references: [id])
+    authorId        String?     @db.ObjectId
     article         Article     @relation(fields: [articleId], references: [id])
     articleId       String      @db.ObjectId
 }

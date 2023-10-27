@@ -32,7 +32,7 @@ const PopularArticles = async () => {
                         >
                             <span>{article.title}</span>
                             <span className="self-end text-sm">
-                                200 komentarzy
+                                Komentarzy: {article._count.comments}
                             </span>
                         </Link>
                     );

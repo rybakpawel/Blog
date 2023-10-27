@@ -36,7 +36,20 @@ export async function createArticle(article) {
 
 export async function getArticleById(id) {
     try {
-        const article = await prisma.article.findUnique({ where: { id } });
+        const article = await prisma.article.findUnique({
+            where: {
+                id,
+            },
+            include: {
+                comments: true,
+                _count: {
+                    select: {
+                        comments: true,
+                    },
+                },
+            },
+        });
+
         return { article };
     } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -56,7 +69,15 @@ export async function getPopularArticles() {
                     _count: "desc",
                 },
             },
+            include: {
+                _count: {
+                    select: {
+                        comments: true,
+                    },
+                },
+            },
         });
+
         return { popularArticles };
     } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {

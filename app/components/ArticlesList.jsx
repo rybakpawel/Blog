@@ -20,7 +20,7 @@ async function fetchArticles(pageIndex, limit) {
     return { articles, totalArticles };
 }
 
-const Articles = async () => {
+const ArticlesList = async () => {
     const searchParams = useSearchParams();
     const pageParam = searchParams.get("page");
 
@@ -54,4 +54,4 @@ const Articles = async () => {
     );
 };
 
-export default Articles;
+export default ArticlesList;

@@ -1,6 +1,5 @@
 "use client";
 
-import { Space_Mono } from "next/font/google";
 import Link from "next/link";
 import { IconContext } from "react-icons";
 import { RiFacebookFill, RiLinkedinFill, RiGithubFill } from "react-icons/ri";
