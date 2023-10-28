@@ -1,7 +1,22 @@
 import CommentForm from "./CommentForm";
 import UserCard from "./UserCard";
 
-const Comments = ({ articleId, comments, countComments }) => {
+async function fetchCommentsById(articleId) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/comments/${articleId}`,
+    {
+      cache: "no-store",
+    },
+  );
+  const comments = await response.json();
+
+  if (comments === 404) notFound();
+  return comments;
+}
+
+const Comments = async ({ articleId, countComments }) => {
+  const { comments } = await fetchCommentsById(articleId);
+
   return (
     <section id="comments">
       <CommentForm articleId={articleId} />

@@ -1,8 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const CommentForm = ({ articleId }) => {
+  const router = useRouter();
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [commentForm, setCommentForm] = useState({
     email: "",
@@ -38,7 +40,7 @@ const CommentForm = ({ articleId }) => {
     };
 
     const fetchedResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/comment/`,
+      `${process.env.NEXT_PUBLIC_API_URL}/comments/`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -86,7 +88,7 @@ const CommentForm = ({ articleId }) => {
           content: "",
         },
       });
-    else
+    else {
       setResponse({
         message: "Opublikowano komentarz!",
         color: "success",
@@ -96,6 +98,8 @@ const CommentForm = ({ articleId }) => {
           content: "",
         },
       });
+      router.refresh();
+    }
   };
 
   return (
