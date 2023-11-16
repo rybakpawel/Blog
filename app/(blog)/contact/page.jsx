@@ -1,5 +1,5 @@
-import SocialMedia from "../components/SocialMedia";
-import ContactForm from "../components/ContactForm";
+import SocialMedia from "../../../components/SocialMedia";
+import ContactForm from "../../../components/ContactForm";
 
 export default function ContactPage() {
   return (

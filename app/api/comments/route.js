@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { commentFormValidation } from "@/app/validation/commentFormValidation";
-import { createComment } from "@/app/lib/prisma/comments";
+import { commentFormValidation } from "@/validation/commentFormValidation";
+import { createComment } from "@/prisma/comments";
 
 export async function POST(request) {
   try {

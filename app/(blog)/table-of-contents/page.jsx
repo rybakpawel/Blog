@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SideBar from "./../components/SideBar";
+import SideBar from "../../../components/SideBar";
 
 async function fetchArticles(pageIndex, limit) {
   const response = await fetch(

@@ -1,23 +1,20 @@
 import { NextResponse } from "next/server";
-import { getArticles } from "@/app/lib/prisma/articles";
+import { getArticles } from "@/prisma/articles";
 
 export async function GET(request) {
-    try {
-        const { searchParams } = new URL(request.url);
+  try {
+    const { searchParams } = new URL(request.url);
 
-        const page = searchParams.get("page");
-        const limit = searchParams.get("limit");
+    const page = searchParams.get("page");
+    const limit = searchParams.get("limit");
 
-        const { articles, totalArticles, error } = await getArticles(
-            +page,
-            +limit
-        );
+    const { articles, totalArticles, error } = await getArticles(+page, +limit);
 
-        if (error) {
-            return NextResponse.json(error);
-        }
-        return NextResponse.json({ articles, totalArticles });
-    } catch {
-        return NextResponse.json({ error: error.message });
+    if (error) {
+      return NextResponse.json(error);
     }
+    return NextResponse.json({ articles, totalArticles });
+  } catch {
+    return NextResponse.json({ error: error.message });
+  }
 }

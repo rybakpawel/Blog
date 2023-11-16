@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getCommentsById } from "@/app/lib/prisma/comments";
+import { getCommentsById } from "@/prisma/comments";
 
 export async function GET(request, { params }) {
   try {

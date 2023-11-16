@@ -1,9 +1,9 @@
 import "./globals.css";
 import { Lato } from "next/font/google";
-import Header from "./components/Header";
-import Navigation from "./components/Navigation";
-import Main from "./components/Main";
-import Footer from "./components/Footer";
+import Header from "../../components/Header";
+import Navigation from "../../components/Navigation";
+import Main from "../../components/Main";
+import Footer from "../../components/Footer";
 
 const lato = Lato({
   weight: ["400", "700"],

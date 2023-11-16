@@ -42,11 +42,6 @@ const Navigation = () => {
                 O MNIE
               </li>
             </Link>
-            <Link href="/programming">
-              <li className="mb-[10px] transition hover:scale-105  md:mx-[10px] md:mb-0">
-                PROGRAMOWANIE
-              </li>
-            </Link>
             <Link href="/contact">
               <li className="transition hover:scale-105  md:mx-[10px]">
                 KONTAKT

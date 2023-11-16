@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import Article from "../../components/Article";
-import SideBar from "../../components/SideBar";
+import Article from "../../../../components/Article";
+import SideBar from "../../../../components/SideBar";
 import defaultImage from "@/public/defaultImage.jpg";
 
 async function fetchArticleById(id) {
