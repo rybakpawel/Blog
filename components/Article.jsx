@@ -1,3 +1,4 @@
+import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import DateLine from "./DateLine";
 import UserCard from "./UserCard";
@@ -16,7 +17,9 @@ const Article = ({ id, image, title, content, createdDate, countComments }) => {
         date={articleDate}
         countComments={countComments}
       />
-      <p className="my-[20px]">{content}</p>
+      <div className="my-[20px]">
+        <ReactMarkdown>{content}</ReactMarkdown>
+      </div>
       <div className="flex justify-end">
         <UserCard name="Paweł Rybak" />
       </div>
