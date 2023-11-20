@@ -18,3 +18,35 @@ export async function GET(request) {
     return NextResponse.json({ error: error.message });
   }
 }
+
+export async function POST(request) {
+  try {
+    const articleData = await request.json();
+    //   const { commentForm, articleId } = commentData;
+
+    //   const { error } = commentFormValidation(commentForm);
+
+    //   if (error) {
+    //     const locations = [];
+    //     error.details.forEach((detail) => {
+    //       locations.push({
+    //         label: detail.context.label,
+    //         message: detail.message,
+    //       });
+    //     });
+
+    //     return NextResponse.json({
+    //       error: 400,
+    //       locations,
+    //     });
+    //   } else {
+    //     const { error } = await createComment(commentForm, articleId);
+
+    //     return NextResponse.json({
+    //       error,
+    //     });
+    //   }
+  } catch {
+    return NextResponse.json({ error: error.message });
+  }
+}

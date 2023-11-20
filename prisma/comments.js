@@ -7,7 +7,7 @@ export async function createComment(commentForm, articleId) {
 
     const user = await prisma.user.findUnique({
       where: {
-        id: "653a9849ee189c6ba140f28e", // id Usera, który jest ma typ enum Guest - rozwiązanie tymczasowe dopóki nie będzie opcji logowania na stronie
+        id: "653a9849ee189c6ba140f28e", // id Usera, który ma typ enum Guest - rozwiązanie tymczasowe dopóki nie będzie opcji logowania na stronie
       },
     });
 

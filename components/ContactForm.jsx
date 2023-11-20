@@ -194,7 +194,7 @@ const ContactForm = () => {
           {response.location.content}
         </span>
         <button
-          className="mx-auto w-[150px] cursor-pointer rounded-md bg-primary px-[54px] py-[10px] text-white transition duration-300 hover:scale-105"
+          className="mx-auto w-[150px] cursor-pointer rounded-md bg-primary px-[54px] py-[10px] text-white transition duration-300 hover:opacity-75"
           type="submit"
           form="contactForm"
         >

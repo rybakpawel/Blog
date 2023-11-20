@@ -110,7 +110,7 @@ const CommentForm = ({ articleId }) => {
         }`}
       >
         <button
-          className={`w-[150px] transform cursor-pointer rounded-md bg-primary px-[37px] py-[10px] text-white transition duration-300 hover:scale-105 ${
+          className={`w-[150px] transform cursor-pointer rounded-md bg-primary px-[37px] py-[10px] text-white transition duration-300 hover:opacity-75 ${
             isFormVisible ? "pointer-events-none scale-0" : ""
           }`}
           onClick={() => {
@@ -176,7 +176,7 @@ const CommentForm = ({ articleId }) => {
           >
             {response.location.email}
           </span>
-          <button className="mx-auto mt-auto hidden w-[150px] cursor-pointer rounded-md bg-primary px-[40px] py-[10px] text-white transition duration-300 hover:scale-105 md:block">
+          <button className="mx-auto mt-auto hidden w-[150px] cursor-pointer rounded-md bg-primary px-[40px] py-[10px] text-white transition duration-300 hover:opacity-75 md:block">
             Opublikuj
           </button>
         </div>
