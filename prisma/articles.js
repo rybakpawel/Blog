@@ -27,10 +27,39 @@ export async function getArticles(page, limit) {
 
 export async function createArticle(article) {
   try {
-    const createdArticle = await prisma.article.create({ data: article });
-    return { article: createdArticle };
+    const { title, content, authorId, category } = article;
+    const user = await prisma.user.findUnique({
+      where: {
+        id: authorId
+      },
+    });
+
+    await prisma.article.create({ 
+      data: {
+        title,
+        content,
+        authorId: user.id,
+        category
+      }
+    });
+
+    return { 
+      error: false 
+    };
   } catch (error) {
-    return { error };
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2023")
+        return {
+          error: 404,
+        };
+      else
+        return {
+          error: 500,
+        };
+    }
+    return {
+      error: error.code,
+    };
   }
 }
 
