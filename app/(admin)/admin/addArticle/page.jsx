@@ -5,6 +5,7 @@ import { useState, useRef } from "react";
 export default function AddArticlePage() {
     const [articleForm, setArticleForm] = useState({
         title: "",
+        mainImage: null,
         content: "",
         authorId: "64627cba4d5c4755ddf3bbc4", // do obsłużenia jak będzie system logowania
         category: "",
@@ -48,14 +49,18 @@ export default function AddArticlePage() {
       const handleSubmitArticleForm = async (e) => {
         e.preventDefault();
 
-        console.log(articleForm)
+        const formData = new FormData();
+
+        for (const value in articleForm) {
+          formData.append(value, articleForm[value]);
+        }
+        console.log(formData)
 
         const fetchedResponse = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/articles/`,
           {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(articleForm),
+            body: formData,
           },
           {
             cache: "no-store",
@@ -67,6 +72,7 @@ export default function AddArticlePage() {
 
         setArticleForm({
           title: "",
+          mainImage: null,
           content: "",
           category: "",
         });
@@ -198,7 +204,13 @@ export default function AddArticlePage() {
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-lg">Zdjęcie główne</label>
-            <input id="image" type="file" name="image" />
+            <input id="image" 
+              type="file" 
+              name="image" 
+              onChange={(e) => setArticleForm({
+                ...articleForm,
+                mainImage: e.target.files[0]
+              })}/>
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex justify-between">

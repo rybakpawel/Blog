@@ -6,6 +6,9 @@ export const articleFormValidation = (data) => {
             "string.min": "Tytuł musi zawierać co najmniej 2 znaki.",
             "any.required": "Tytuł jest wymagany.",
         }),
+        mainImage: Joi.any().required({
+            "any.required": "Zdjęcie główne jest wymagane"
+        }),
         content: Joi.string().min(30).required().messages({
             "string.email": "Treść musi zawierać co najmniej 30 znaków.",
             "any.required": "Treść jest wymagana.",

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { writeFile } from 'fs/promises'
 import { getArticles } from "@/prisma/articles";
 import { articleFormValidation } from "@/validation/articleFormValidation";
 import { createArticle } from "@/prisma/articles";
@@ -23,11 +24,18 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    const articleData = await request.json();
-
+    const formData = await request.formData();
+    const articleData = {
+      title: formData.get('title'),
+      mainImage: formData.get('mainImage'),
+      content: formData.get('content'),
+      authorId: formData.get('authorId'),
+      category: formData.get('category')
+    }
       const { error } = articleFormValidation(articleData);
 
       if (error) {
+    
         const locations = [];
         error.details.forEach((detail) => {
           locations.push({
@@ -43,6 +51,11 @@ export async function POST(request) {
       } else {
         const { error } = await createArticle(articleData);
 
+        const bytes = await articleData.mainImage.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        const path = `"@/public/${articleData.mainImage.name}`
+        await writeFile(path, buffer)  /// tu wywala błęden
+        console.log('po write file')
         return NextResponse.json({
           error,
         });

@@ -10,6 +10,7 @@ datasource db {
 model Article {
     id              String      @id @default(auto()) @map("_id") @db.ObjectId
     title           String
+    mainImage       String
     content         String
     category        Category
     createdDate     DateTime    @default(now())
