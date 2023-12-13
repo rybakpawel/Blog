@@ -25,7 +25,7 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const formData = await request.formData();
-    const articleData = {
+    let articleData = {
       title: formData.get('title'),
       mainImage: formData.get('mainImage'),
       content: formData.get('content'),
@@ -49,18 +49,21 @@ export async function POST(request) {
           locations,
         });
       } else {
-        const { error } = await createArticle(articleData);
-
         const bytes = await articleData.mainImage.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const path = `"@/public/${articleData.mainImage.name}`
-        await writeFile(path, buffer)  /// tu wywala błęden
-        console.log('po write file')
+        const path = `public/articleImages/${articleData.mainImage.name}`;
+        articleData.mainImage = path;
+
+        const { error } = await createArticle(articleData);
+    
+        await writeFile(path, buffer)
+       
         return NextResponse.json({
           error,
         });
       }
-  } catch {
+  } catch (error) {
+    console.error(error)
     return NextResponse.json({ error: error.message });
   }
 }

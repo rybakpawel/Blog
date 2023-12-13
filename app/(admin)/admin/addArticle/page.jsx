@@ -54,7 +54,6 @@ export default function AddArticlePage() {
         for (const value in articleForm) {
           formData.append(value, articleForm[value]);
         }
-        console.log(formData)
 
         const fetchedResponse = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/articles/`,
