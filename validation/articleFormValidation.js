@@ -9,6 +9,7 @@ export const articleFormValidation = (data) => {
         mainImage: Joi.any().required({
             "any.required": "Zdjęcie główne jest wymagane"
         }),
+        images: Joi.any(),
         content: Joi.string().min(30).required().messages({
             "string.email": "Treść musi zawierać co najmniej 30 znaków.",
             "any.required": "Treść jest wymagana.",

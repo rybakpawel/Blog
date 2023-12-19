@@ -1,16 +1,18 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function AddArticlePage() {
     const [articleForm, setArticleForm] = useState({
         title: "",
         mainImage: null,
+        images: [],
         content: "",
         authorId: "64627cba4d5c4755ddf3bbc4", // do obsłużenia jak będzie system logowania
         category: "",
-    }); 
-
+    });
+    const router = useRouter()
     const textareaRef = useRef();
 
     const handleAddMarkdownText = (
@@ -52,8 +54,12 @@ export default function AddArticlePage() {
         const formData = new FormData();
 
         for (const value in articleForm) {
-          formData.append(value, articleForm[value]);
+          if (value !== 'images') formData.append(value, articleForm[value]);
         }
+
+        for (let i = 0; i < articleForm.images.length; i++) {
+          formData.append('images', articleForm.images[i]);
+      }
 
         const fetchedResponse = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/articles/`,
@@ -67,14 +73,18 @@ export default function AddArticlePage() {
         );
 
         const res = await fetchedResponse.json();
-        console.log(res)
 
-        setArticleForm({
-          title: "",
-          mainImage: null,
-          content: "",
-          category: "",
-        });
+        if(res.error) {
+          setArticleForm({
+            title: "",
+            mainImage: null,
+            images: [],
+            content: "",
+            category: "",
+          });
+        } else {
+          router.push('/admin')
+        }
       };
 
     return (
@@ -203,13 +213,37 @@ export default function AddArticlePage() {
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-lg">Zdjęcie główne</label>
-            <input id="image" 
+            <input id="mainImage" 
               type="file" 
-              name="image" 
+              name="mainImage"
+              className="file:border-none file:cursor-pointer file:rounded-md file:bg-primary file:px-[15px] file:py-[5px] file:text-white file:transition file:duration-200 file:hover:opacity-75"
               onChange={(e) => setArticleForm({
                 ...articleForm,
                 mainImage: e.target.files[0]
               })}/>
+          </div>
+          <div className="flex flex-col gap-2">
+            <label className="text-lg">Zdjęcia</label>
+            <input id="images" 
+              type="file" 
+              name="images"
+              className="file:border-none file:cursor-pointer file:rounded-md file:bg-primary file:px-[15px] file:py-[5px] file:text-white file:transition file:duration-200 file:hover:opacity-75"
+              multiple
+              onChange={(e) => {
+                const newArray = articleForm.images
+                newArray.push(e.target.files[0])
+                
+                setArticleForm({
+                ...articleForm,
+                images: newArray
+                })
+              }}/>
+              {articleForm.images ? articleForm.images.map((image) => {
+                return (
+                  <p key={image.name}>{image.name}</p>
+                )
+              }) : null}
+              
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex justify-between">
@@ -225,7 +259,7 @@ export default function AddArticlePage() {
                   className="cursor-pointer rounded-md bg-primary px-[15px] py-[5px] text-white transition duration-200 hover:opacity-75"
                   type="button"
                   onClick={() =>
-                    handleAddMarkdownText("[", "](Wprowadź adres)")
+                    handleAddMarkdownText("[", "](WPROWADŹ ADRES)")
                   }
                 >
                   Link
@@ -242,7 +276,7 @@ export default function AddArticlePage() {
                   type="button"
                   onClick={() =>
                     handleAddMarkdownText(
-                      "![Wprowadź ALT](Wprowadź URL)",
+                      '![WPROWADŹ ALT]("public/articleImages/WPROWADŹ NAZWĘ ZDJĘCIA")',
                       "",
                       true,
                     )

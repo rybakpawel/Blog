@@ -5,14 +5,14 @@ import DateLine from "./DateLine";
 const ArticlesListItem = ({ id, img, title, content, createdDate }) => {
   const datetime = new Date(createdDate);
   const articleDate = datetime.toISOString().split("T")[0];
-
+  const path = require(`../${img}`)
   return (
     <div className="my-[20px]">
       <div className="md:mb-[16px] md:flex md:max-h-[200px]">
         <Link href={`/articles/${id}`}>
           <div className="overflow-hidden">
             <Image
-              src={img}
+              src={path}
               alt={title}
               className="mb-[16px] max-h-[200px] max-w-[320px] cursor-pointer object-cover transition duration-300 hover:scale-110 md:mb-0"
             />

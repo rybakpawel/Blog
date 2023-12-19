@@ -28,14 +28,14 @@ export async function POST(request) {
     let articleData = {
       title: formData.get('title'),
       mainImage: formData.get('mainImage'),
+      images: formData.getAll('images'),
       content: formData.get('content'),
       authorId: formData.get('authorId'),
       category: formData.get('category')
     }
-      const { error } = articleFormValidation(articleData);
+    const { error } = articleFormValidation(articleData);
 
-      if (error) {
-    
+    if (error) {
         const locations = [];
         error.details.forEach((detail) => {
           locations.push({
@@ -48,22 +48,29 @@ export async function POST(request) {
           error: 400,
           locations,
         });
-      } else {
+    } else {
         const bytes = await articleData.mainImage.arrayBuffer();
         const buffer = Buffer.from(bytes);
         const path = `public/articleImages/${articleData.mainImage.name}`;
         articleData.mainImage = path;
 
         const { error } = await createArticle(articleData);
-    
-        await writeFile(path, buffer)
+
+        await writeFile(path, buffer);
+
+        for (const image of articleData.images) {
+          const bytes = await image.arrayBuffer();
+          const buffer = Buffer.from(bytes);
+          const path = `public/articleImages/${image.name}`;
+          
+          await writeFile(path, buffer);
+        }
        
         return NextResponse.json({
-          error,
+            error,
         });
-      }
+    }
   } catch (error) {
-    console.error(error)
     return NextResponse.json({ error: error.message });
   }
 }

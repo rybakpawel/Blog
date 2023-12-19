@@ -3,7 +3,6 @@
 import { useSearchParams } from "next/navigation";
 import ArticlesListItem from "./ArticlesListItem";
 import Pagination from "./Pagination";
-import defaultImage from "@/public/defaultImage.jpg";
 
 async function fetchArticles(pageIndex, limit) {
     const response = await fetch(
@@ -35,7 +34,7 @@ const ArticlesList = async () => {
                             <ArticlesListItem
                                 id={article.id}
                                 key={article.id}
-                                img={defaultImage}
+                                img={article.mainImage}
                                 title={article.title}
                                 content={article.content}
                                 createdDate={article.createdDate}

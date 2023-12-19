@@ -4,7 +4,7 @@ import { getPopularArticles } from "@/prisma/articles";
 export async function GET(request) {
   try {
     const { popularArticles, error } = await getPopularArticles();
-
+    
     if (error) {
       return NextResponse.json(error);
     }
