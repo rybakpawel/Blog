@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import DateLine from "./DateLine";
 
-const ArticlesListItem = ({ id, img, title, content, createdDate }) => {
+const ArticlesListItem = ({ id, img, title, description, content, createdDate }) => {
   const datetime = new Date(createdDate);
   const articleDate = datetime.toISOString().split("T")[0];
-  const path = require(`../${img}`)
+  const path = img.slice(6);
+
   return (
     <div className="my-[20px]">
       <div className="md:mb-[16px] md:flex md:max-h-[200px]">
@@ -14,6 +15,8 @@ const ArticlesListItem = ({ id, img, title, content, createdDate }) => {
             <Image
               src={path}
               alt={title}
+              width={320}
+              height={200}
               className="mb-[16px] max-h-[200px] max-w-[320px] cursor-pointer object-cover transition duration-300 hover:scale-110 md:mb-0"
             />
           </div>
@@ -24,7 +27,7 @@ const ArticlesListItem = ({ id, img, title, content, createdDate }) => {
               {title}
             </h2>
           </Link>
-          <p className="h-[7.5em] overflow-hidden">{content}</p>
+          <p className="h-[7.5em] overflow-hidden">{description}</p>
         </div>
       </div>
       <DateLine variant="more" date={articleDate} id={id} />

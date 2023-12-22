@@ -10,8 +10,12 @@ export const articleFormValidation = (data) => {
             "any.required": "Zdjęcie główne jest wymagane"
         }),
         images: Joi.any(),
+        description: Joi.string().max(300).required().messages({
+            "string.max": "Opis może zawierać maksymalnie 300 znaków.",
+            "any.required": "Opis jest wymagany.",
+        }),
         content: Joi.string().min(30).required().messages({
-            "string.email": "Treść musi zawierać co najmniej 30 znaków.",
+            "string.min": "Treść musi zawierać co najmniej 30 znaków.",
             "any.required": "Treść jest wymagana.",
         }),
         authorId: Joi.string().length(24).required().messages({

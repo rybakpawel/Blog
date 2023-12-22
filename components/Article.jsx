@@ -18,7 +18,7 @@ const Article = ({ id, image, title, content, createdDate, countComments }) => {
         countComments={countComments}
       />
       <div className="my-[20px]">
-        <ReactMarkdown>{content}</ReactMarkdown>
+        <ReactMarkdown className="prose">{content}</ReactMarkdown>
       </div>
       <div className="flex justify-end">
         <UserCard name="Paweł Rybak" />

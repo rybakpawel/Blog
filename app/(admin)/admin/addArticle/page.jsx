@@ -8,6 +8,7 @@ export default function AddArticlePage() {
         title: "",
         mainImage: null,
         images: [],
+        description: "",
         content: "",
         authorId: "64627cba4d5c4755ddf3bbc4", // do obsłużenia jak będzie system logowania
         category: "",
@@ -79,6 +80,7 @@ export default function AddArticlePage() {
             title: "",
             mainImage: null,
             images: [],
+            description: "",
             content: "",
             category: "",
           });
@@ -223,6 +225,22 @@ export default function AddArticlePage() {
               })}/>
           </div>
           <div className="flex flex-col gap-2">
+            <label className="text-lg">Opis</label>
+            <textarea
+                className="w-full rounded-md border-[0.5px] border-solid py-[3px] pl-[10px]"
+                id="description"
+                name="description"
+                cols={2}
+                value={articleForm.description}
+                onChange={(e) =>
+                  setArticleForm({
+                    ...articleForm,
+                    description: e.target.value,
+                  })
+                }
+            ></textarea>
+          </div>
+          <div className="flex flex-col gap-2">
             <label className="text-lg">Zdjęcia</label>
             <input id="images" 
               type="file" 
@@ -267,16 +285,16 @@ export default function AddArticlePage() {
                 <button
                   className="cursor-pointer rounded-md bg-primary px-[15px] py-[5px] text-white transition duration-200 hover:opacity-75"
                   type="button"
-                  onClick={() => handleAddMarkdownText("##")}
+                  onClick={() => handleAddMarkdownText("## ")}
                 >
-                  Podtytuł
+                  Nagłówek
                 </button>
                 <button
                   className="cursor-pointer rounded-md bg-primary px-[15px] py-[5px] text-white transition duration-200 hover:opacity-75"
                   type="button"
                   onClick={() =>
                     handleAddMarkdownText(
-                      '![WPROWADŹ ALT]("public/articleImages/WPROWADŹ NAZWĘ ZDJĘCIA")',
+                      '![WPROWADŹ ALT](/articleImages/WPROWADŹ NAZWĘ ZDJĘCIA)',
                       "",
                       true,
                     )

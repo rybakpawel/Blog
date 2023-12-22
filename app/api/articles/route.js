@@ -29,6 +29,7 @@ export async function POST(request) {
       title: formData.get('title'),
       mainImage: formData.get('mainImage'),
       images: formData.getAll('images'),
+      description: formData.get('description'),
       content: formData.get('content'),
       authorId: formData.get('authorId'),
       category: formData.get('category')

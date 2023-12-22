@@ -36,6 +36,7 @@ const ArticlesList = async () => {
                                 key={article.id}
                                 img={article.mainImage}
                                 title={article.title}
+                                description={article.description}
                                 content={article.content}
                                 createdDate={article.createdDate}
                             />
