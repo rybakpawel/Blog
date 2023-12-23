@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Lato } from "next/font/google";
+import AuthProvider from "@/components/AuthProvider";
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -9,7 +10,11 @@ const lato = Lato({
 export default function RootLayout({ children }) {
   return (
     <html lang="pl">
-      <body className={lato.className}>{children}</body>
+      <AuthProvider>
+        <body className={lato.className}>
+          {children}
+        </body>
+      </AuthProvider>
     </html>
   );
 }

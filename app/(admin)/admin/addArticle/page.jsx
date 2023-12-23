@@ -2,8 +2,18 @@
 
 import { useState, useRef } from "react";
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation'
 
 export default function AddArticlePage() {
+    const { data: session } = useSession({
+      required: true,
+      onUnauthenticated() {
+        redirect("/api/auth/signin?callbackUrl=/admin/addArticle");
+      }
+    })
+    const router = useRouter()
+    const textareaRef = useRef();
     const [articleForm, setArticleForm] = useState({
         title: "",
         mainImage: null,
@@ -13,8 +23,6 @@ export default function AddArticlePage() {
         authorId: "64627cba4d5c4755ddf3bbc4", // do obsłużenia jak będzie system logowania
         category: "",
     });
-    const router = useRouter()
-    const textareaRef = useRef();
 
     const handleAddMarkdownText = (
         textBeforeSelected,
@@ -90,6 +98,7 @@ export default function AddArticlePage() {
       };
 
     return (
+        session ?
         <form
           className="mx-[auto] my-5 flex w-3/4 flex-col gap-8"
           id="articleForm"
@@ -332,6 +341,6 @@ export default function AddArticlePage() {
               }
             ></textarea>
           </div>
-        </form>
+        </form> : null
     )
 }
