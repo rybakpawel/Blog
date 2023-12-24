@@ -1,6 +1,3 @@
-"use client";
-
-import { useSearchParams } from "next/navigation";
 import ArticlesListItem from "./ArticlesListItem";
 import Pagination from "./Pagination";
 
@@ -19,9 +16,8 @@ async function fetchArticles(pageIndex, limit) {
     return { articles, totalArticles };
 }
 
-const ArticlesList = async () => {
-    const searchParams = useSearchParams();
-    const pageParam = searchParams.get("page");
+const ArticlesList = async ({searchParams}) => {
+    const pageParam = searchParams.page;
 
     const { articles, totalArticles } = await fetchArticles(pageParam, 5);
 
