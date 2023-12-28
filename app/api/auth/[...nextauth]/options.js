@@ -1,33 +1,38 @@
-import GitHubProvider from "next-auth/providers/github";
+// import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
 export const options = {
     providers: [
-      GitHubProvider({
-        profile(profile) {
-          console.log("Profile GitHub: ", profile);
+      // GitHubProvider({
+      //   profile(profile) {
+      //     console.log("Profile GitHub: ", profile);
   
-          let userRole = "GitHub User";
-          if (profile?.email == "rybakpawel92@gmail.com") {
-            userRole = "admin";
-          }
+      //     let userRole = "GitHub User";
+      //     if (profile?.email === "rybakpawel92@gmail.com") {
+      //       userRole = "admin";
+      //     }
   
-          return {
-            ...profile,
-            role: userRole,
-          };
-        },
-        clientId: process.env.GITHUB_ID,
-        clientSecret: process.env.GITHUB_Secret,
-      }),
+      //     return {
+      //       ...profile,
+      //       role: userRole,
+      //     };
+      //   },
+      //   clientId: process.env.GITHUB_ID,
+      //   clientSecret: process.env.GITHUB_Secret,
+      // }),
       GoogleProvider({
         profile(profile) {
           console.log("Profile Google: ", profile);
   
           let userRole = "Google User";
+          if (profile?.email === "rybakpawel92@gmail.com") {
+            userRole = "admin";
+          }
+
           return {
             ...profile,
             id: profile.sub,
+            image: profile.picture,
             role: userRole,
           };
         },

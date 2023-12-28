@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import Article from "../../../../components/Article";
 import SideBar from "../../../../components/SideBar";
-import defaultImage from "@/public/defaultImage.jpg";
 
 async function fetchArticleById(id) {
   const response = await fetch(
@@ -20,15 +19,17 @@ export default async function ArticlePage({ params }) {
   const { id } = params;
   const article = await fetchArticleById(id);
 
-  const { title, content, createdDate, _count } = article;
+  const { title, mainImage, content, authorName, authorAvatar, createdDate, _count } = article;
 
   return _count ? (
     <div className="md:flex md:justify-between">
       <Article
         id={id}
-        image={defaultImage}
+        image={mainImage}
         title={title}
         content={content}
+        authorName={authorName}
+        authorAvatar={authorAvatar}
         createdDate={createdDate}
         countComments={_count.comments}
       />

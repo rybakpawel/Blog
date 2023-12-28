@@ -10,6 +10,7 @@ export const commentFormValidation = (data) => {
             "string.email": "Podany adres e-mail jest nieprawidłowy.",
             "any.required": "E-mail jest wymagany.",
         }),
+        avatar: Joi.any(),
         content: Joi.string().min(3).required().messages({
             "string.min": "Wiadomość musi zawierać co najmniej 10 znaków.",
             "any.required": "Wiadomość jest wymagana.",

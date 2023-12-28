@@ -8,6 +8,7 @@ export default async function AdminPage() {
   if (!session) redirect("/api/auth/signin?callbackUrl=/admin");
   
   return (
+    session && session.user.role === 'admin' ?
     <section>
       <div className="mx-[auto] flex h-[100vh] flex-col items-center justify-center gap-10 bg-slate-100 text-2xl md:flex-row">
         <Link href="/admin/addArticle">
@@ -25,6 +26,6 @@ export default async function AdminPage() {
           </button>
         </Link>
       </div>
-    </section>
+    </section> : <p>Brak uprawnień</p>
   );
 }

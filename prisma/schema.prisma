@@ -14,26 +14,11 @@ model Article {
     description     String
     content         String
     category        Category
+    authorName      String
+    authorEmail     String
+    authorAvatar    String
     createdDate     DateTime    @default(now())
-    
-    author          User        @relation(fields: [authorId], references: [id])
-    authorId        String      @db.ObjectId
 
-    comments        Comment[]
-}
-
-model User {
-    id              String      @id @default(auto()) @map("_id") @db.ObjectId
-    email           String      @unique
-    username        String      @unique
-    password        String
-    firstName       String?
-    lastName        String?
-    registerDate    DateTime
-    lastLogin       DateTime?
-    role            Role        @default(Guest)
-
-    articles        Article[]
     comments        Comment[]
 }
 
@@ -41,11 +26,10 @@ model Comment {
     id              String      @id @default(auto()) @map("_id") @db.ObjectId
     content         String
     createdDate     DateTime    @default(now())
-    guestName       String?
-    guestEmail      String?
+    authorName      String
+    authorEmail     String
+    authorAvatar    String
 
-    author          User?       @relation(fields: [authorId], references: [id])
-    authorId        String?     @db.ObjectId
     article         Article     @relation(fields: [articleId], references: [id])
     articleId       String      @db.ObjectId
 }
@@ -64,10 +48,4 @@ enum Category {
     Projects
     SelfDevelopment
     Sports
-}
-
-enum Role {
-    SuperAdmin
-    User
-    Guest
 }

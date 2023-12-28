@@ -20,9 +20,22 @@ export default function AddArticlePage() {
         images: [],
         description: "",
         content: "",
-        authorId: "64627cba4d5c4755ddf3bbc4", // do obsłużenia jak będzie system logowania
+        authorName: "",
+        authorEmail: "",
+        authorAvatar: "",
         category: "",
     });
+    const [sessionLoaded, setSessionLoaded] = useState(false);
+
+    if (session && !sessionLoaded) {
+      setArticleForm({
+        ...articleForm,
+        authorName: session.user.name,
+        authorEmail: session.user.email,
+        authorAvatar: session.user.image
+      });
+      setSessionLoaded(true);
+    }
 
     const handleAddMarkdownText = (
         textBeforeSelected,
@@ -96,9 +109,9 @@ export default function AddArticlePage() {
           router.push('/admin')
         }
       };
-
+   
     return (
-        session ?
+        session && session.user.role === 'admin' ?
         <form
           className="mx-[auto] my-5 flex w-3/4 flex-col gap-8"
           id="articleForm"
@@ -341,6 +354,6 @@ export default function AddArticlePage() {
               }
             ></textarea>
           </div>
-        </form> : null
+        </form> : <p>Brak uprawnień</p>
     )
 }

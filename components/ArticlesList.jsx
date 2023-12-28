@@ -16,7 +16,7 @@ async function fetchArticles(pageIndex, limit) {
     return { articles, totalArticles };
 }
 
-const ArticlesList = async ({searchParams}) => {
+const ArticlesList = async ( {searchParams} ) => {
     const pageParam = searchParams.page;
 
     const { articles, totalArticles } = await fetchArticles(pageParam, 5);

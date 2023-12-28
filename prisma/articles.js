@@ -27,13 +27,7 @@ export async function getArticles(page, limit) {
 
 export async function createArticle(article) {
   try {
-    const { title, mainImage, description, content, authorId, category } = article;
- 
-    const user = await prisma.user.findUnique({
-      where: {
-        id: authorId
-      },
-    });
+    const { title, mainImage, description, content, category, authorName, authorEmail, authorAvatar } = article;
 
     await prisma.article.create({ 
       data: {
@@ -41,8 +35,10 @@ export async function createArticle(article) {
         mainImage,
         description,
         content,
-        authorId: user.id,
-        category
+        category,
+        authorName,
+        authorEmail,
+        authorAvatar
       }
     });
 

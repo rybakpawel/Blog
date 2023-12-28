@@ -3,12 +3,13 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const CommentForm = ({ articleId }) => {
+const CommentForm = ({ articleId, authorEmail, authorName, authorAvatar }) => {
   const router = useRouter();
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [commentForm, setCommentForm] = useState({
-    email: "",
-    name: "",
+    email: authorEmail,
+    name: authorName,
+    avatar: authorAvatar,
     content: "",
   });
   const [response, setResponse] = useState({
@@ -54,8 +55,7 @@ const CommentForm = ({ articleId }) => {
     const res = await fetchedResponse.json();
 
     setCommentForm({
-      email: "",
-      name: "",
+      ...commentForm,
       content: "",
     });
 
@@ -124,66 +124,20 @@ const CommentForm = ({ articleId }) => {
       <form
         id="commentForm"
         name="commentForm"
-        className={`flex transform flex-col rounded-md bg-black/5 px-[10px] py-[20px] transition-transform md:flex-row md:justify-between md:px-[20px] ${
+        className={`flex transform flex-col rounded-md bg-black/5 px-[10px] pb-[20px] transition-transform ${
           isFormVisible ? "static scale-100" : "absolute scale-0"
         }`}
         onSubmit={handleSubmitCommentForm}
       >
-        <div className="flex flex-grow flex-col">
-          <input
-            type="text"
-            name="name"
-            id="name"
-            className={`rounded-md border-[0.5px] border-solid py-[3px] pl-[10px] ${
-              response.location.name ? "border-error" : "border-black/25"
-            }`}
-            value={commentForm.name}
-            placeholder="Imię"
-            autoComplete="off"
-            required
-            onChange={(e) =>
-              setCommentForm({
-                ...commentForm,
-                name: e.target.value,
-              })
-            }
-          />
-          <span
-            className={`h-[15px] text-xs text-${response.color} text-right font-bold`}
-          >
-            {response.location.name}
-          </span>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className={`rounded-md border-[0.5px] border-solid py-[3px] pl-[10px] ${
-              response.location.email ? "border-error" : "border-black/25"
-            }`}
-            value={commentForm.email}
-            placeholder="E-mail"
-            autoComplete="off"
-            required
-            onChange={(e) =>
-              setCommentForm({
-                ...commentForm,
-                email: e.target.value,
-              })
-            }
-          />
-          <span
-            className={`h-[15px] text-xs text-${response.color} text-right font-bold`}
-          >
-            {response.location.email}
-          </span>
-          <button className="mx-auto mt-auto hidden w-[150px] cursor-pointer rounded-md bg-primary px-[40px] py-[10px] text-white transition duration-300 hover:opacity-75 md:block">
-            Opublikuj
-          </button>
+        <div className="h-[20px]">
+          <p className={`text-sm text-${response.color} text-center font-bold`}>
+            {response.message}
+          </p>
         </div>
         <textarea
           name="content"
           id="content"
-          className={`mb-[20px] rounded-md border-[0.5px] border-solid py-[3px] pl-[10px] md:mb-0 md:ml-[20px] md:w-[520px] ${
+          className={`mb-[20px] rounded-md border-[0.5px] border-solid py-[3px] pl-[10px] ${
             response.location.content ? "border-error" : "border-black/25"
           }`}
           value={commentForm.content}
@@ -198,7 +152,7 @@ const CommentForm = ({ articleId }) => {
           }
         ></textarea>
         <button
-          className="mx-auto w-[150px] cursor-pointer rounded-md bg-primary px-[40px] py-[10px] text-white md:hidden"
+          className="mx-auto w-[150px] cursor-pointer rounded-md bg-primary px-[40px] py-[10px] text-white"
           type="submit"
           form="commentForm"
         >

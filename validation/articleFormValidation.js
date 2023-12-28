@@ -18,13 +18,18 @@ export const articleFormValidation = (data) => {
             "string.min": "Treść musi zawierać co najmniej 30 znaków.",
             "any.required": "Treść jest wymagana.",
         }),
-        authorId: Joi.string().length(24).required().messages({
-            "string.length": "Identyfikator autora musi zawierać 24 znaki.",
-            "any.required": "Identyfikator autora jest wymagany.",
-        }),
         category: Joi.string().required().messages({
             "any.required": "Kategoria jest wymagana.",
         }),
+        authorName: Joi.string().min(2).required().messages({
+            "string.min": "Imię autora musi zawierać co najmniej 2 znaki.",
+            "any.required": "Imię autora jest wymagane.",
+        }),
+        authorEmail: Joi.string().email().required().messages({
+            "string.email": "Adres e-mail autora jest nieprawidłowy.",
+            "any.required": "E-mail autora jest wymagany.",
+        }),
+        authorAvatar: Joi.any(),
     }).options({ abortEarly: false });
 
     return schema.validate(data);

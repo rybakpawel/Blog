@@ -9,7 +9,7 @@ const UserCard = ({ image, name, date }) => {
 
   return (
     <div className="flex">
-      <Image src={image} alt={name} className="h-[32px] w-[32px]" />
+      <Image src={image} alt={name} width={32} height={32} className="h-[32px] w-[32px] rounded-full" />
       <div
         className={`flex flex-col ${commentDate ? "" : "justify-center"} ml-[10px]`}
       >

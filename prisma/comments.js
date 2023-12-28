@@ -3,13 +3,7 @@ import { Prisma } from "@prisma/client";
 
 export async function createComment(commentForm, articleId) {
   try {
-    const { email, name, content } = commentForm;
-
-    const user = await prisma.user.findUnique({
-      where: {
-        id: "653a9849ee189c6ba140f28e", // id Usera, który ma typ enum Guest - rozwiązanie tymczasowe dopóki nie będzie opcji logowania na stronie
-      },
-    });
+    const { email, name, avatar, content } = commentForm;
 
     const article = await prisma.article.findUnique({
       where: {
@@ -20,10 +14,10 @@ export async function createComment(commentForm, articleId) {
     await prisma.comment.create({
       data: {
         content,
-        authorId: user.id,
+        authorName: name,
+        authorEmail: email,
+        authorAvatar: avatar,
         articleId: article.id,
-        guestName: name,
-        guestEmail: email,
       },
     });
 

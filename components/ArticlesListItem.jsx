@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DateLine from "./DateLine";
 
-const ArticlesListItem = ({ id, img, title, description, content, createdDate }) => {
+const ArticlesListItem = ({ id, img, title, description, createdDate }) => {
   const datetime = new Date(createdDate);
   const articleDate = datetime.toISOString().split("T")[0];
   const path = img.slice(6);

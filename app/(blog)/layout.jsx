@@ -18,14 +18,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pl">
-      <body className={lato.className}>
-        <Header></Header>
-        <div className="max-w-[1200px] px-[20px] md:mx-[auto]">
-          <Navigation></Navigation>
-          <Main children={children}></Main>
-        </div>
-        <Footer></Footer>
-      </body>
+        <body className={lato.className}>
+          <Header></Header>
+          <div className="max-w-[1200px] px-[20px] md:mx-[auto]">
+            <Navigation></Navigation>
+            <Main children={children}></Main>
+          </div>
+          <Footer></Footer>
+        </body>
     </html>
   );
 }

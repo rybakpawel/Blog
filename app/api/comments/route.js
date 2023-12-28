@@ -6,7 +6,6 @@ export async function POST(request) {
   try {
     const commentData = await request.json();
     const { commentForm, articleId } = commentData;
-
     const { error } = commentFormValidation(commentForm);
 
     if (error) {

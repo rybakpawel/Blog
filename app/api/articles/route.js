@@ -31,8 +31,10 @@ export async function POST(request) {
       images: formData.getAll('images'),
       description: formData.get('description'),
       content: formData.get('content'),
-      authorId: formData.get('authorId'),
-      category: formData.get('category')
+      category: formData.get('category'),
+      authorName: formData.get('authorName'),
+      authorEmail: formData.get('authorEmail'),
+      authorAvatar: formData.get('authorAvatar'),
     }
     const { error } = articleFormValidation(articleData);
 
