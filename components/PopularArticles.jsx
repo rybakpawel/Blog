@@ -22,7 +22,7 @@ const PopularArticles = async () => {
       <h2 className="my-[20px] text-center text-lg tracking-[1px]">
         Popularne wpisy
       </h2>
-      {popularArticles.length > 0 ? (
+      {popularArticles ? (
         popularArticles.map((article) => {
           return (
             <Link

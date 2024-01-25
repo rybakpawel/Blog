@@ -23,7 +23,7 @@ export default async function TableOfContents() {
     <div className="md:flex md:justify-between">
       <div className="md:w-[71%]">
         <h1 className="my-[30px] text-2xl">Spis treści</h1>
-        {articles.length > 0 ? (
+        {articles ? (
           articles.map((article, index) => {
             const datetime = new Date(article.createdDate);
             const articleDate = datetime.toISOString().split("T")[0];
