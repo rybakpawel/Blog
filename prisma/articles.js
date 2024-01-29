@@ -27,9 +27,18 @@ export async function getArticles(page, limit) {
 
 export async function createArticle(article) {
   try {
-    const { title, mainImage, description, content, category, authorName, authorEmail, authorAvatar } = article;
+    const {
+      title,
+      mainImage,
+      description,
+      content,
+      category,
+      authorName,
+      authorEmail,
+      authorAvatar,
+    } = article;
 
-    await prisma.article.create({ 
+    await prisma.article.create({
       data: {
         title,
         mainImage,
@@ -38,12 +47,12 @@ export async function createArticle(article) {
         category,
         authorName,
         authorEmail,
-        authorAvatar
-      }
+        authorAvatar,
+      },
     });
 
-    return { 
-      error: false 
+    return {
+      error: false,
     };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
