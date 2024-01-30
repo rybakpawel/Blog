@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import aboutMeImage from "@/public/static/PawelRybak.jpeg";
+import aboutMeImage from "@/public/static/PawelRybak.jpg";
 
 const AboutMeSmall = () => {
   return (

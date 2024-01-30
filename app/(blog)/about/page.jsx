@@ -1,5 +1,5 @@
 import Image from "next/image";
-import aboutMeImage from "@/public/static/PawelRybak.jpeg";
+import aboutMeImage from "@/public/static/PawelRybak.jpg";
 
 export default function AboutPage() {
   return (
