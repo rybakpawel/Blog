@@ -1,10 +1,10 @@
 import ArticlesList from "../../components/ArticlesList";
 import SideBar from "../../components/SideBar";
 
-export default function HomePage( {searchParams} ) {
+export default function HomePage({ searchParams }) {
   return (
     <div className="md:flex md:justify-between">
-      <ArticlesList searchParams={searchParams}/>
+      <ArticlesList searchParams={searchParams} />
       <SideBar />
     </div>
   );

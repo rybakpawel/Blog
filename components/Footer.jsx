@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import CookieConsent from "react-cookie-consent";
 import SocialMedia from "./SocialMedia";
 
 const Footer = () => {
@@ -22,17 +23,17 @@ const Footer = () => {
               Strona główna
             </li>
           </Link>
-          <Link href="about">
+          <Link href="/table-of-contents">
             <li className="mx-[15px] transition duration-300 hover:text-white/75">
               Spis treści
             </li>
           </Link>
-          <Link href="contents">
+          <Link href="/about">
             <li className="mx-[15px] transition duration-300 hover:text-white/75">
               O mnie
             </li>
           </Link>
-          <Link href="contact">
+          <Link href="/contact">
             <li className="mx-[15px] transition duration-300 hover:text-white/75">
               Kontakt
             </li>
@@ -44,6 +45,11 @@ const Footer = () => {
           </p>
         </div>
       </div>
+      <CookieConsent debug={true} buttonText="Zgoda">
+        Ta strona korzysta z ciasteczek aby świadczyć usługi na najwyższym
+        poziomie. Dalsze korzystanie ze strony oznacza, że zgadzasz się na ich
+        użycie.
+      </CookieConsent>
     </footer>
   );
 };
