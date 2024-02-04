@@ -1,3 +1,4 @@
+import corsHeaders from "@/middleware/cors";
 import { NextResponse } from "next/server";
 import { contactFormValidation } from "@/validation/contactFormValidation";
 import { createContactMessage } from "@/prisma/contact";
@@ -16,18 +17,27 @@ export async function POST(request) {
         });
       });
 
-      return NextResponse.json({
-        error: 400,
-        locations,
-      });
+      return NextResponse.json(
+        {
+          error: 400,
+          locations,
+        },
+        { headers: corsHeaders },
+      );
     } else {
       const { error } = await createContactMessage(contactForm);
 
-      return NextResponse.json({
-        error,
-      });
+      return NextResponse.json(
+        {
+          error,
+        },
+        { headers: corsHeaders },
+      );
     }
   } catch {
-    return NextResponse.json({ error: error.message });
+    return NextResponse.json(
+      { error: error.message },
+      { headers: corsHeaders },
+    );
   }
 }

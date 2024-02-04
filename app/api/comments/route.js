@@ -1,3 +1,4 @@
+import corsHeaders from "@/middleware/cors";
 import { NextResponse } from "next/server";
 import { commentFormValidation } from "@/validation/commentFormValidation";
 import { createComment } from "@/prisma/comments";
@@ -17,18 +18,24 @@ export async function POST(request) {
         });
       });
 
-      return NextResponse.json({
-        error: 400,
-        locations,
-      });
+      return NextResponse.json(
+        {
+          error: 400,
+          locations,
+        },
+        { headers: corsHeaders },
+      );
     } else {
       const { error } = await createComment(commentForm, articleId);
 
-      return NextResponse.json({
-        error,
-      });
+      return NextResponse.json({ error }, { headers: corsHeaders });
     }
   } catch {
-    return NextResponse.json({ error: error.message });
+    return NextResponse.json(
+      { error: error.message },
+      { headers: corsHeaders },
+    );
   }
 }
+
+return NextResponse.json({ foo: "bar" }, { headers: corsHeaders });

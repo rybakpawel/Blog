@@ -20,7 +20,6 @@ const ContactForm = () => {
   });
 
   const handleSubmitContactForm = async (e) => {
-    console.log('w fukncji')
     e.preventDefault();
 
     setResponse({

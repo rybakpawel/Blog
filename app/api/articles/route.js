@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { writeFile } from 'fs/promises'
+import { writeFile } from "fs/promises";
 import { getArticles } from "@/prisma/articles";
 import { articleFormValidation } from "@/validation/articleFormValidation";
 import { createArticle } from "@/prisma/articles";
@@ -26,54 +26,63 @@ export async function POST(request) {
   try {
     const formData = await request.formData();
     let articleData = {
-      title: formData.get('title'),
-      mainImage: formData.get('mainImage'),
-      images: formData.getAll('images'),
-      description: formData.get('description'),
-      content: formData.get('content'),
-      category: formData.get('category'),
-      authorName: formData.get('authorName'),
-      authorEmail: formData.get('authorEmail'),
-      authorAvatar: formData.get('authorAvatar'),
-    }
+      title: formData.get("title"),
+      mainImage: formData.get("mainImage"),
+      images: formData.getAll("images"),
+      description: formData.get("description"),
+      content: formData.get("content"),
+      category: formData.get("category"),
+      authorName: formData.get("authorName"),
+      authorEmail: formData.get("authorEmail"),
+      authorAvatar: formData.get("authorAvatar"),
+    };
     const { error } = articleFormValidation(articleData);
 
     if (error) {
-        const locations = [];
-        error.details.forEach((detail) => {
-          locations.push({
-            label: detail.context.label,
-            message: detail.message,
-          });
+      const locations = [];
+      error.details.forEach((detail) => {
+        locations.push({
+          label: detail.context.label,
+          message: detail.message,
         });
+      });
 
-        return NextResponse.json({
+      return NextResponse.json(
+        {
           error: 400,
           locations,
-        });
+        },
+        { headers: corsHeaders },
+      );
     } else {
-        const bytes = await articleData.mainImage.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const path = `public/articleImages/${articleData.mainImage.name}`;
-        articleData.mainImage = path;
+      const bytes = await articleData.mainImage.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      const path = `public/articleImages/${articleData.mainImage.name}`;
+      articleData.mainImage = path;
 
-        const { error } = await createArticle(articleData);
+      const { error } = await createArticle(articleData);
+
+      await writeFile(path, buffer);
+
+      for (const image of articleData.images) {
+        const bytes = await image.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        const path = `public/articleImages/${image.name}`;
 
         await writeFile(path, buffer);
+      }
 
-        for (const image of articleData.images) {
-          const bytes = await image.arrayBuffer();
-          const buffer = Buffer.from(bytes);
-          const path = `public/articleImages/${image.name}`;
-          
-          await writeFile(path, buffer);
-        }
-       
-        return NextResponse.json({
-            error,
-        });
+      return NextResponse.json(
+        {
+          error,
+        },
+        { headers: corsHeaders },
+      );
     }
   } catch (error) {
-    return NextResponse.json({ error: error.message });
+    return NextResponse.json(
+      { error: error.message },
+      { headers: corsHeaders },
+    );
   }
 }
